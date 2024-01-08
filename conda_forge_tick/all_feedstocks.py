@@ -15,7 +15,7 @@ def get_all_feedstocks_from_github():
     with sensitive_env() as env:
         gh = github.Github(env["PASSWORD"], per_page=100)
 
-    org = gh.get_organization("conda-forge")
+    org = gh.get_organization("TileDB-Inc")
     archived = set()
     not_archived = set()
     default_branches = {}
@@ -69,6 +69,7 @@ def main(args: Any = None) -> None:
     setup_logger(logger)
     logger.info("fetching active feedstocks from github")
     data = get_all_feedstocks_from_github()
+    print(data)
     with open("all_feedstocks.json", "w") as fp:
         dump(data, fp)
 
